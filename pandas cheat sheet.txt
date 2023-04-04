@@ -1,0 +1,139 @@
+df = pd.read_csv(r"../..weather program\1. Weather Data.csv")
+            how to make a data frame
+student_data = [
+[100,80,10]
+[90,70,7]
+[120,100,14]
+[80,50,2]
+]
+
+pd.DataFrame(student_data,columns=['iq', 'marks','package'])
+
+-----------------using dictionary----------------
+
+student_dict = {
+'iq':[100,90,120,80]
+'marks':[80,70,100,50]
+'package':[10,7,14,2]
+}
+pd.DataFrame(student_dict)
+
+-------------------- Basic Function ---------------------
+df.info()                       # all information dy ga
+df.shape                        # row or columns count kry ga
+df.dtypes                       # datatype print kry ga (int,boll,object)
+df.index                        #(start=0, stop=950)
+df.columns                      # all columns print kry ga
+df.values                       # all values print kre ga
+df.head()                       # phli 5 value print kre ga
+df.tail()                       # last 5 value print kre ga
+df.sample()                     # rendomly value print kre ga
+df.discribe()                   # all numarecal summery dy ga
+df.isnull().sum()               # missing values btae ga
+df.notnull().sum()              # missing values btae ga
+df.duplicated().sum()           # duplicate value btae ga
+df.drop_duplicates()            # duplicates value remove kre ga
+df.rename()                     # column reaname krny k lye
+df['Date/Time'].unique()        # columns ki unique value print kry ga
+df['Temp_C'].value_counts()     # temp k column se values count kre ga
+
+
+--------------------- Math Function ----------------------
+df.sum()                        # all columns ko sum kr dy ga
+df.sum()(axis=0)                # all columns ko sum kr dy ga
+df.sum()(axis=1)                # all row ko sum kr dy ga
+df.min()                        # column vise minimum btae ga
+df.max()                        # column vise maximum btae ga
+df.median()                     # column vise median btae ga
+df.std()
+df.var()                        # variance
+weather['Visibility_km'].mean() #
+
+----------------------------------------------------------
+df['column1']                          # single columns ki all value print kry ga (serease)
+df[['column1','column2','column3']]    # multipule columns ki all value print kry ga (serease)
+df.set_index('name',inplace=True)      # index khtm kr k name ko index kr dy ga
+df.iloc[0]                             # one row ki detail dy ga
+df.iloc[0:5]                           # 5 row ki detail dy ga
+df.iloc[[0,4,5]]                       # fancy row  fetch
+df.loc['student A']                    #
+
+----------------------------------------------------------
+df.iloc[0:3,0:3]                                   # number se data nikaly ga
+df.loc[0:2,'colm1':'colm2']                        # name se data nikaly ga
+df.dropna(inplace=True)                            # null values wali sb row khtm kr dy ga
+df['actors'].str.split('|').apply(lamda x:x[0])    # actor k column men ja kr phla actor ly ga
+df['ID'] = df['ID'].astype('int32')                # id k column ki datatype change kre ga
+df['Season'] = df['Season'].astype('category')     # Season k column ki datatype change kre ga
+df.rename(columns={'Weather':'Weather_condition'}) # column ko rename kre ga
+
+------------------ Questense -----------------------------
+Q:super over kitny howe?
+ipl[ipl['SuperOver']=='Y'].shape
+
+Q:Kolkata men CSK ne kitny match jety?
+ipl[(ipl['City']=='Kolkata') & (ipl['WinningTeam']== 'Chennai Super Kings')].shape[0]
+
+Q:Toss vin kr k jetny ki persontage kya ha?
+ipl[ipl['TossWinner'] == ipl['WinningTeam']].shape[0]/ipl.shape[0]*100
+
+Q: Top movies data fetch
+movies[(movies['imdb_rating'] > 8) & (movies['imdb_votes'] > 10000)]
+
+Q: Action movies and imdb rating 7.5
+# mask1 = movies['genres'].str.split('|').apply(lambda x:'Action' in x)
+mask1 = movies['genres'].str.contains('Action')
+mask2 = movies['imdb_rating'] > 7.5
+movies[mask1 & mask2]
+
+Q:
+weather[(weather['Wind Speed_km/h'] > 24) & (weather['Visibility_km']==25)].shape
+
+Q: or oprator
+weather[(weather['Weather']=='Clear') | (weather['Visibility_km'] > 40)]
+
+Q: and , or opreater both
+weather[(weather['Weather']=='Clear') & (weather['Rel Hum_%'] > 50) | (weather['Visibility_km']>40)]
+
+
+
+
+
+df.shape                      # number of rows and column
+
+df.nunique()                  # all columns ke unique number print kry ga
+df.count()                    # all columns ke all number print kry ga
+df.value_counts()
+df['Temp_C'].value_counts()   # temp ki value print kry ga
+
+
+# df['Temp_C'].values       # all values print kre ga
+# df['Temp_C'].unique()     # all values print kre ga
+# df[df['Weather'] == 'clear']
+# df[df['Wind Speed_km/h'] == 4].count()
+# df.isnull().sum()
+# df['Visibility_km'].mean()
+# df['Press_kPa'].std()
+# df['Rel Hum_%'].var()
+# df[df['Weather'] == 'snow']
+# df.where(df['Weather'] == 'snow')
+# df[(df['Wind Speed_Km/h'] > 24) & (df['Visibility_km'] == 25)]
+# df.groupby(df['Weather']).min()
+# df.groupby(df['Weather']).max()
+# df[((df['Weather'] == 'clear') & (df['Rel Hum_%'] > 50)) | (df['Visibility_km'] > 40)]
+x = df[df['Weather'].str.contains('Fog')]
+
+print(x)
+
+# id = humidity
+#                 most_humid_day = date
+
+# print(f'Highest temperature on day : {highest_temp_day}')
+# print(f'Lowest temperature on day : {lowest_temp_day}')
+# print(f'Most humid day : {most_humid_day}')
+
+
+
+
+# weather = pd.read_csv('Murree_weather_2004_Aug.txt')
+# print(weather)
